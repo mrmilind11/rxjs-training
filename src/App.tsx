@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
+import { concat, concatMap, delay, map, merge, mergeMap, Observable, Subscription, switchMap, take, timer } from 'rxjs';
+import MapsComponent from './maps';
+import ShareComponent from './share';
 
 function App() {
+  const [selectedPage, setSelectedPage] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div style={{ display: 'flex' }}>
+        <button onClick={() => setSelectedPage(0)}>Map operators</button>
+        <button onClick={() => setSelectedPage(1)}>Share operators</button>
+      </div>
+      {
+        selectedPage === 0 && <MapsComponent />
+      }
+      {
+        selectedPage === 1 && <ShareComponent />
+      }
     </div>
   );
 }
